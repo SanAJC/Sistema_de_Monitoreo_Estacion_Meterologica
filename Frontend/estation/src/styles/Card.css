@@ -1,0 +1,64 @@
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    grid-template-rows: auto auto; 
+    gap: 20px; 
+    padding: 20px;
+}
+
+.dashboard-category {
+    grid-column: span 2; 
+    width: 100%;
+
+}
+
+.card {
+    width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    border: 1px solid white;
+    text-align: center;
+    padding: none;
+    margin-bottom: 10px;
+
+    background: #333333;
+}
+
+.card-content {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+    padding: none;
+    margin: none;
+}
+
+.current-value {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.current-value h2 {
+    font-size: 50px;
+    color: white;
+    font-weight: bold;
+}
+
+.current-value img {
+    width: 74px;
+    height: 74px;
+}
+
+#data {
+    margin-top: -80px;
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+}
+
+
+
+
+
