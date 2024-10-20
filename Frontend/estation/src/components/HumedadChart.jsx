@@ -6,31 +6,21 @@ import {
 import Card from './Card';
 import '../styles/Card.css';  
 
-const TemperaturaChart = () => {
+const HumedadChart = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:8000/api/TemperatureHumidityData/');
-        const filteredData = response.data.map(item => ({
-          timestamp: item.timestamp,
-          temperature: item.temperature
-        }));
-        setData(filteredData);
-      } catch (error) {
+    axios.get('http://localhost:8000/api/TemperatureHumidityData/')
+      .then((response) => {
+        setData(response.data);
+      })
+      .catch((error) => {
         console.error('Error al obtener los datos:', error);
-      }
-    };
-
-    fetchData(); 
-    const intervalId = setInterval(fetchData, 5000); 
-
-    return () => clearInterval(intervalId); 
+      });
   }, []);
 
   return (
-    <Card title="Temperatura - Gráfica de Línea">
+    <Card title="Humedad - Gráfica de Línea">
       <ResponsiveContainer width="100%" height={230}>
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -38,14 +28,11 @@ const TemperaturaChart = () => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="temperature" stroke="#FF7200" />
+          <Line type="monotone" dataKey="humedad" stroke="#FF7200" />
         </LineChart>
       </ResponsiveContainer>
     </Card>
   );
 };
 
-export default TemperaturaChart;
-
-
-
+export default HumedadChart;

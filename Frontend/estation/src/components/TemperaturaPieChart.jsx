@@ -6,19 +6,25 @@ import '../styles/Card.css';
 
 const TemperaturaPieChart = () => {
   const [temperature, setTemperature] = useState(0);
-  const maxTemperature = 50; // Valor máximo para la temperatura (puedes ajustarlo según tu caso)
+  const maxTemperature = 50; // Valor máximo para la temperatura
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/TemperatureHumidityData/')
-      .then((response) => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/TemperatureHumidityData/');
         const lastDataPoint = response.data[response.data.length - 1];
         if (lastDataPoint) {
           setTemperature(lastDataPoint.temperature);
         }
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error('Error al obtener los datos:', error);
-      });
+      }
+    };
+
+    fetchData(); 
+    const intervalId = setInterval(fetchData, 5000);
+
+    return () => clearInterval(intervalId); 
   }, []);
 
   const gaugeData = [
@@ -26,7 +32,7 @@ const TemperaturaPieChart = () => {
     { value: maxTemperature - temperature },
   ];
 
-  const COLORS = ['#FF7200', '#374151']; // Colores para la gráfica
+  const COLORS = ['#FF7200', '#374151']; 
 
   return (
     <Card title="Temperatura">
@@ -47,7 +53,7 @@ const TemperaturaPieChart = () => {
           </Pie>
         </PieChart>
       </ResponsiveContainer>
-      <h2 id='data'>{temperature}°C</h2>
+      <h2 id="data">{temperature}°C / 50°C</h2>
     </Card>
   );
 };

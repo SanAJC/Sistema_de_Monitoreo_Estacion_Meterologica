@@ -21,20 +21,20 @@ function App() {
       <div className="Content">
         <aside>
           <nav>
-            <ul onClick={() => handleCategoryChange('temperatura')}>
-              <img src='/src/assets/temp.png' alt="Temperatura"/>
+            <ul onClick={() => handleCategoryChange('temperatura')} id='hover-temp'>
+              <img src='/src/assets/temp.png' alt="Temperatura" id='temp'/>
               <li>Temperatura</li>
             </ul>
-            <ul onClick={() => handleCategoryChange('humedad')}>
-              <img src='/src/assets/hum.png' alt="Humedad"/>
+            <ul onClick={() => handleCategoryChange('humedad')}id='hover-hum'>
+              <img src='/src/assets/hum.png' alt="Humedad" id='hum'/>
               <li>Humedad</li>
             </ul>
-            <ul onClick={() => handleCategoryChange('radiacion')}>
-              <img src='/src/assets/luz.png' alt="Radiacion"/>
+            <ul onClick={() => handleCategoryChange('radiacion')}id='hover-radi'>
+              <img src='/src/assets/luz.png' alt="Radiacion" id='radi'/>
               <li>Radiacion</li>
             </ul>
-            <ul onClick={() => handleCategoryChange('lluvia')}>
-              <img src='/src/assets/lluvia.png' alt="Lluvia"/>
+            <ul onClick={() => handleCategoryChange('lluvia')}id='hover-lluvi'>
+              <img src='/src/assets/lluvia.png' alt="Lluvia" id='lluvi'/>
               <li>Lluvia</li>
             </ul>
           </nav>

@@ -72,12 +72,48 @@ nav ul {
     align-items: center;
     border-radius: 15px;
     
- 
 }
 
-nav ul:hover{
+
+#temp{
+    filter: drop-shadow(
+        0 0 10px rgb(255, 114, 0)
+    );
+}
+#hum{
+    filter: drop-shadow(
+        0 0 10px rgb(62, 169, 255)
+    );
+}
+#radi{
+    filter: drop-shadow(
+        0 0 10px rgb(255, 233, 64)
+    );
+}
+#lluvi{
+    filter: drop-shadow(
+        0 0 10px rgb(96, 124, 139)
+    );
+}
+
+
+
+
+#hover-temp:hover{
     transition: all 0.5s;
     background: #FF7200;
+}
+#hover-hum:hover{
+    transition: all 0.5s;
+    background: #42AAFF;
+}
+#hover-radi:hover{
+    transition: all 0.5s;
+    background: #FFE940;
+}
+#hover-lluvi:hover{
+    transition: all 0.5s;
+    background: #189EB0;
 }
 
 nav ul li {
