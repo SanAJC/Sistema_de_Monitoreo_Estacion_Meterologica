@@ -10,13 +10,23 @@ const HumedadChart = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:8000/api/TemperatureHumidityData/')
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/api/TemperatureHumidityData/');
+        const filteredData = response.data.map(item => ({
+          timestamp: item.timestamp,
+          humidity: item.humidity
+        }));
+        setData(filteredData);
+      } catch (error) {
         console.error('Error al obtener los datos:', error);
-      });
+      }
+    };
+
+    fetchData(); 
+    const intervalId = setInterval(fetchData, 5000); 
+
+    return () => clearInterval(intervalId); 
   }, []);
 
   return (
@@ -28,7 +38,7 @@ const HumedadChart = () => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Line type="monotone" dataKey="humedad" stroke="#FF7200" />
+          <Line type="monotone" dataKey="humidity" stroke="#42AAFF" />
         </LineChart>
       </ResponsiveContainer>
     </Card>

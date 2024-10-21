@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import TemperaturaChart from './components/TemperaturaChart';
 import TemperaturaPieChart from './components/TemperaturaPieChart';
 import CurrentTemperatureCard from './components/TemperatureCard';
+import HumedadChart from './components/HumedadChart';
+import HumedadPieChart from './components/HumedadPieChart';
+import CurrentHumedadCard from './components/HumedadCard';
 
 import './styles/App.css'
 
