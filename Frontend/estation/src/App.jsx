@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import TemperaturaChart from './components/TemperaturaChart';
-import TemperaturaPieChart from './components/TemperaturaPieChart';
-import CurrentTemperatureCard from './components/TemperatureCard';
-import HumedadChart from './components/HumedadChart';
-import HumedadPieChart from './components/HumedadPieChart';
-import CurrentHumedadCard from './components/HumedadCard';
+import TemperaturaChart from './components/Temperatura/TemperaturaChart';
+import TemperaturaPieChart from './components/Temperatura/TemperaturaPieChart';
+import CurrentTemperatureCard from './components/Temperatura/TemperatureCard';
+import HumedadChart from './components/Humedad/HumedadChart';
+import HumedadPieChart from './components/Humedad/HumedadPieChart';
+import CurrentHumedadCard from './components/Humedad/HumedadCard';
 
 import './styles/App.css'
 
@@ -15,11 +15,16 @@ function App() {
   const handleCategoryChange =(category) =>{
     setCategory(category);
   }
+
+  const handleDownload = () => {
+    window.open('http://localhost:8000/export_excel/', '_blank');
+  };
+
   return (
     <div className="App">
       <header>
         <h1>Sistema de monitoreo del clima </h1>
-        <button type="submit">Informe</button>
+        <button type="button" onClick={handleDownload}>Informe</button>
       </header>
       <div className="Content">
         <aside>

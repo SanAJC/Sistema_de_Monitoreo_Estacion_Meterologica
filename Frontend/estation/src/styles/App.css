@@ -100,19 +100,19 @@ nav ul {
 
 
 #hover-temp:hover{
-    transition: all 0.5s;
+    transition: all 1s;
     background: #FF7200;
 }
 #hover-hum:hover{
-    transition: all 0.5s;
+    transition: all 1s;
     background: #42AAFF;
 }
 #hover-radi:hover{
-    transition: all 0.5s;
+    transition: all 1s;
     background: #FFE940;
 }
 #hover-lluvi:hover{
-    transition: all 0.5s;
+    transition: all 1s;
     background: #189EB0;
 }
 
