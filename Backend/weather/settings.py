@@ -13,11 +13,13 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import threading
 from api.mqtt_client import start_mqtt_client
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+# Ruta al archivo del certificado Root CA
+ROOT_CA_PATH = os.path.join(BASE_DIR, 'cert', 'mqtt_root_ca.pem')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
