@@ -5,7 +5,9 @@ import CurrentTemperatureCard from './components/Temperatura/TemperatureCard';
 import HumedadChart from './components/Humedad/HumedadChart';
 import HumedadPieChart from './components/Humedad/HumedadPieChart';
 import CurrentHumedadCard from './components/Humedad/HumedadCard';
-
+import SolarChart from './components/Radiacion Solar/SolarChart';
+import SolarPieChart from './components/Radiacion Solar/SolarPieChart';
+import CurrentSolarCard from './components/Radiacion Solar/SolarCard';
 import './styles/App.css'
 
 function App() {
@@ -65,6 +67,16 @@ function App() {
               <CurrentHumedadCard />
               <div className="dashboard-category">
                 <HumedadChart />
+              </div>
+            </>
+          )}
+
+          {category === 'radiacion' && (
+            <>
+              <SolarPieChart />
+              <CurrentSolarCard />
+              <div className="dashboard-category">
+                <SolarChart />
               </div>
             </>
           )}

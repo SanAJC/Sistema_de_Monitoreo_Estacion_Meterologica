@@ -1,3 +1,5 @@
+#include <Wire.h>
+#include <BH1750.h>
 #include <WiFi.h>
 #include <PubSubClient.h>
 #include <WiFiClientSecure.h>
@@ -9,7 +11,7 @@ const char* password = "B3VX61UM";
 
 // Configuración de MQTT con HiveMQ
 const char* mqtt_server = "dc9cdf297a2042e1b8ae427f624eca0a.s1.eu.hivemq.cloud";  
-const int mqtt_port = 8883;  /
+const int mqtt_port = 8883;
 const char* mqtt_username = "san_ats";  
 const char* mqtt_password = "tribecca";  
 const char* topic = "weather/temperature_humidity";
@@ -53,6 +55,9 @@ emyPxgcYxn/eR44/KJ4EBs+lVDR3veyJm+kXQ99b21/+jh5Xos1AnX5iItreGCc=
 #define DHTPIN 4        
 #define DHTTYPE DHT11
 DHT dht(DHTPIN, DHTTYPE);
+
+// Configuración del sensor BH1750
+BH1750 lightMeter;
 
 // Cliente WiFi y MQTT
 WiFiClientSecure espClient;
@@ -102,6 +107,14 @@ void setup() {
 
   espClient.setCACert(root_ca);  // Configurar el certificado raíz
   client.setServer(mqtt_server, mqtt_port);  // Conectar al broker MQTT
+
+  // Inicializar BH1750
+  Wire.begin();
+  if (!lightMeter.begin(BH1750::CONTINUOUS_HIGH_RES_MODE)) {
+    Serial.println("Error inicializando BH1750");
+    while (1);
+  }
+  Serial.println("BH1750 inicializado correctamente");
 }
 
 void loop() {
@@ -112,17 +125,26 @@ void loop() {
 
   float h = dht.readHumidity();
   float t = dht.readTemperature();
+  float lux = lightMeter.readLightLevel();
 
   if (isnan(h) || isnan(t)) {
     Serial.println("Fallo en la lectura del sensor DHT11");
     return;
   }
 
-  // Convertir los datos a formato JSON
-  String payload = "{\"temperature\": " + String(t) + ", \"humidity\": " + String(h) + "}";
+  // Crear el mensaje JSON
+  String payload = "{\"temperature\": ";
+  payload += String(t);
+  payload += ", \"humidity\": ";
+  payload += String(h);
+  payload += ", \"irradiance\": ";
+  payload += String(lux);
+  payload += "}";
 
-  // Publicar los datos en el topic
-  client.publish(topic, (char*) payload.c_str(), true);
+  // Publicar los datos en el broker MQTT
+  Serial.print("Publicando mensaje: ");
+  Serial.println(payload);
+  client.publish(topic, payload.c_str());
 
-  delay(5000);
+  delay(2000);  // Espera 2 segundos entre cada publicación
 }
