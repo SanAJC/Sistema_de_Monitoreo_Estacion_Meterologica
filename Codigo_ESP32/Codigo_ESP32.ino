@@ -6,8 +6,8 @@
 #include "DHT.h"
 
 // Configuración de WiFi
-const char* ssid = "TIGO007998";
-const char* password = "B3VX61UM";
+const char* ssid = "WIFI_UCC_ACADEMICA";
+const char* password = "academica2023*";
 
 // Configuración de MQTT con HiveMQ
 const char* mqtt_server = "dc9cdf297a2042e1b8ae427f624eca0a.s1.eu.hivemq.cloud";  
@@ -58,6 +58,11 @@ DHT dht(DHTPIN, DHTTYPE);
 
 // Configuración del sensor BH1750
 BH1750 lightMeter;
+
+//Sensores de lluvia y agua
+#define RAIN_PIN 32 // Pin analógico para el sensor de lluvia
+#define WATER_PIN 35 // Pin analógico para el sensor de agua
+
 
 // Cliente WiFi y MQTT
 WiFiClientSecure espClient;
@@ -132,6 +137,25 @@ void loop() {
     return;
   }
 
+  //Sensor de agua
+  float waterValue = analogRead(WATER_PIN)/10.0;
+  Serial.print("Cantidad de agua: ");
+  Serial.print(waterValue);
+  Serial.println("ml");
+  Serial.println("-------------");
+
+  //Sensor de lluvia
+  float rainValue = analogRead(RAIN_PIN)/10.0;
+  Serial.print("Cantidad de lluvia: ");
+  Serial.print(rainValue);
+  if(rainValue > 0){
+    Serial.println("Está cayendo agua");    
+  }
+  else {
+    Serial.println("No está lloviendo");
+  }
+  Serial.println("-------------");
+
   // Crear el mensaje JSON
   String payload = "{\"temperature\": ";
   payload += String(t);
@@ -139,6 +163,10 @@ void loop() {
   payload += String(h);
   payload += ", \"irradiance\": ";
   payload += String(lux);
+  payload += ", \"water\": ";
+  payload += String(waterValue);
+  payload += ", \"rain\": ";
+  payload += String(rainValue);
   payload += "}";
 
   // Publicar los datos en el broker MQTT

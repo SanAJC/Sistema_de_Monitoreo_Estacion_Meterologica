@@ -8,6 +8,8 @@ def on_message(client, userdata, msg):
     temperature = payload.get("temperature")
     humidity = payload.get("humidity")
     irradiance = payload.get("irradiance")
+    water=payload.get("water")
+    rain=payload.get("rain")
 
     print(f"Recibido: Temperatura={temperature}, Humedad={humidity}") 
     
@@ -17,8 +19,12 @@ def on_message(client, userdata, msg):
     if irradiance is not None:
         solar_radiation=round(irradiance / 120.0, 2)
         print(f"Recibido: Irradiancia Solar={solar_radiation}")
-
         WeatherDataFactory.create_data('solar_radiation', solar_radiation)
+    if water is not None and rain is not None:
+        WeatherDataFactory.create_data('water_rain', water, rain)
+        print(f"Recibido: Nivel del agua={water}, Intensidad de Lluvia={rain}")
+
+    
 
 def start_mqtt_client():
     client = mqtt.Client()

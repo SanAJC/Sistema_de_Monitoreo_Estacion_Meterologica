@@ -21,13 +21,13 @@ class SolarRadiationData(WeatherStation):
     def __str__(self):
         return f"Radiación solar: {self.solar_radiation} W/m² - {self.timestamp}"
 
-'''
 
 class RainData(WeatherStation):
+    water_level = models.FloatField()
     rain_intensity = models.FloatField()
 
     def __str__(self):
-        return f"Lluvia: {self.rain_intensity} mm - {self.timestamp}"
+        return f"Lluvia: {self.rain_intensity}  - {self.timestamp} , Nivel del agua: {self.water_level} ml"
 
-'''
+
 

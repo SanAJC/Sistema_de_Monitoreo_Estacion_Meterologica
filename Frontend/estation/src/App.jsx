@@ -26,7 +26,7 @@ function App() {
     <div className="App">
       <header>
         <h1>Sistema de monitoreo del clima </h1>
-        <button type="button" onClick={handleDownload}>Informe</button>
+        <button type="button" onClick={handleDownload}><img src='/src/assets/importar.png'/><span>Informe</span></button>
       </header>
       <div className="Content">
         <aside>
