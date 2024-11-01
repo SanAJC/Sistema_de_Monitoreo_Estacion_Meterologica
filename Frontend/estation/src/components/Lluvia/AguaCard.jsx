@@ -3,8 +3,8 @@ import axios from 'axios';
 import Card from '../Card';
 import '/src/styles/Card.css';
 
-const CurrentRainCard = () => {
-  const [rain, setRain] = useState(0);
+const CurrentWaterCard = () => {
+  const [water, setWater] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -12,7 +12,7 @@ const CurrentRainCard = () => {
         const response = await axios.get('http://localhost:8000/api/water-rain/');
         const lastDataPoint = response.data[response.data.length - 1];
         if (lastDataPoint) {
-          setRain(lastDataPoint.rain_intensity);
+          setWater(lastDataPoint.water_level);
         }
       } catch (error) {
         console.error('Error al obtener los datos:', error);
@@ -25,21 +25,14 @@ const CurrentRainCard = () => {
     return () => clearInterval(intervalId); 
   }, []);
 
-  const getRainStatus = () => {
-    if (rain === 0) return "Seco";
-    if (rain > 0 && rain <= 400) return "Mojado";
-    if (rain > 400) return "Inundado";
-    return "Estado desconocido"; 
-  };
-
   return (
-    <Card title="Presencia de Lluvia Actual">
+    <Card title="Nivel de Lluvia Actual">
       <div className="current-value">
-        <img src="/src/assets/lluvi.png" alt="Icono de lluvia" />
-        <h2>{getRainStatus()}</h2>
+        <img src="/src/assets/nivel-de-agua.png" alt="Icono de agua" />
+        <h2>{water} ml</h2>
       </div>
     </Card>
   );
 };
 
-export default CurrentRainCard;
+export default CurrentWaterCard;

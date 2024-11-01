@@ -8,6 +8,10 @@ import CurrentHumedadCard from './components/Humedad/HumedadCard';
 import SolarChart from './components/Radiacion Solar/SolarChart';
 import SolarPieChart from './components/Radiacion Solar/SolarPieChart';
 import CurrentSolarCard from './components/Radiacion Solar/SolarCard';
+import CurrentRainCard  from './components/Lluvia/LluviaCard';
+import CurrentWaterCard from './components/Lluvia/AguaCard';
+import WaterChart from './components/Lluvia/AguaChart';
+import WaterPieChart from './components/Lluvia/AguaPieChart';
 import './styles/App.css'
 
 function App() {
@@ -78,6 +82,14 @@ function App() {
               <div className="dashboard-category">
                 <SolarChart />
               </div>
+            </>
+          )}
+           {category === 'lluvia' && (
+            <>
+              <WaterPieChart/>
+              <CurrentWaterCard />
+              <CurrentRainCard />
+              <WaterChart/>
             </>
           )}
 
