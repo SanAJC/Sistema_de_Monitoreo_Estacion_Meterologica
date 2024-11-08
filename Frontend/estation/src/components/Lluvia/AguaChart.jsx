@@ -4,7 +4,7 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
 import Card from '../Card';
-import '/src/styles/Card.css';  
+import '/src/styles/Card.css';
 
 const WaterChart = () => {
   const [data, setData] = useState([]);

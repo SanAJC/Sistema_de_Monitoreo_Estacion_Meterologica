@@ -26,11 +26,11 @@ const CurrentRainCard = () => {
   }, []);
 
   const getRainStatus = () => {
-    if (rain === 0) return "Seco";
-    if (rain > 0 && rain <= 400) return "Mojado";
-    if (rain > 400) return "Inundado";
+    if (rain >= 400) return "Seco";             // Seco: valor alto
+    if (rain >= 200 && rain < 400) return "Mojado";  // Mojado: valor intermedio
+    if (rain < 200) return "Inundado";           // Inundado: valor bajo
     return "Estado desconocido"; 
-  };
+};
 
   return (
     <Card title="Presencia de Lluvia Actual">
