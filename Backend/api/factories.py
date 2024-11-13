@@ -2,6 +2,7 @@ from .models import TemperatureHumidityData , SolarRadiationData , RainData
 
 class WeatherDataFactory:
     @staticmethod
+    # Patrón Factory: controla la creación de instancias según el tipo de datos solicitado.
     def create_data(data_type, value1, value2=None):
         if data_type == 'temperature_humidity':
             return TemperatureHumidityData.objects.create(temperature=value1, humidity=value2)

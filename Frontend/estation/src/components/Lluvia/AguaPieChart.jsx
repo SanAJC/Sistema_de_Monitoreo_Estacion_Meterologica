@@ -6,7 +6,7 @@ import '/src/styles/Card.css';
 
 const WaterPieChart = () => {
   const [water, setWater] = useState(0);
-  const maxWater = 100; 
+  const maxWater = 500; 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -53,7 +53,7 @@ const WaterPieChart = () => {
           </Pie>
         </PieChart>
       </ResponsiveContainer>
-      <h2 id="data">{water}ml / 100.0ml</h2>
+      <h2 id="data">{water}ml / 500.0ml</h2>
     </Card>
   );
 };

@@ -5,7 +5,7 @@ class WeatherStation(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        abstract = True 
+        abstract = True # Patrón Template Method: `WeatherStation` establece una plantilla con el campo común `timestamp`.
         
 class TemperatureHumidityData(WeatherStation):
     temperature = models.FloatField()

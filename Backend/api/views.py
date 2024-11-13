@@ -16,7 +16,7 @@ class RainDataViewSet(viewsets.ModelViewSet):
     queryset = RainData.objects.all()
     serializer_class = RainDataSerializer
 
-def export_excel(request):
+def export_excel(request): 
     wb = openpyxl.Workbook()
     ws = wb.active
     ws.title = 'Datos Temperatura y Humedad'
@@ -27,8 +27,8 @@ def export_excel(request):
     ws_solar.append(['Timestamp', 'Radiación Solar (W/m²)'])
     solar_data = SolarRadiationData.objects.all()
 
-    ws_rain = wb.create_sheet(title="Datos LLuvia")
-    ws_solar.append(['Timestamp', 'Precensia de Lluvia y nivel de agua'])
+    ws_rain = wb.create_sheet(title="Datos Lluvia")
+    ws_rain.append(['Timestamp', 'Nivel de Agua', 'Intensidad de Lluvia'])  # Corregido el encabezado
     rain_data = RainData.objects.all()
 
     for item in data:
@@ -44,7 +44,7 @@ def export_excel(request):
     for item in rain_data:
         # Remover la zona horaria del timestamp
         timestamp = item.timestamp.replace(tzinfo=None) if item.timestamp else None
-        ws_rain.append([timestamp, item.water_level , item.rain_intensity])
+        ws_rain.append([timestamp, item.water_level, item.rain_intensity])  # Cambiado de ws_solar a ws_rain
 
     response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
     response['Content-Disposition'] = 'attachment; filename=datos_clima.xlsx'
@@ -52,3 +52,4 @@ def export_excel(request):
     wb.save(response)
 
     return response
+
